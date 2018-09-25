@@ -3,35 +3,19 @@ import logo from './logo.svg';
 import './App.css';
 import ReactTable from "react-table";
 import 'react-table/react-table.css'
-
-const data = [{
-    name: 'Tanner Linsley',
-    age: 26,
-    friend: {
-      name: 'Jason Maurer',
-      age: 23,
-    }
-  },{
-    name: 'Danny Spitzberg',
-    age: 36,
-    friend: {
-      name: 'Todd Lundgren',
-      age: 13,
-    }
-  }]
-
-  const columns = [{
-    Header: 'Name',
-    accessor: 'name' // String-based value accessors!
-  }, {
-    Header: 'Age',
-    accessor: 'age',
-    Cell: props => <span className='number'>{props.value}</span> // Custom cell components!
-  }, {
-    id: 'friendName', // Required because our accessor is not a string
-    Header: 'Friend Name',
-    accessor: d => d.friend.name // Custom value accessors!
-  }]
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import TeamList from './TeamList'
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing.unit * 2,
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+});
 
 class App extends Component {
   render() {
@@ -42,10 +26,7 @@ class App extends Component {
           <h1 className="App-title">Welcome to Tourney</h1>
         </header>
 
-        <ReactTable
-          data={data}
-          columns={columns}
-        />
+        <TeamList />
       </div>
     );
   }
