@@ -1,18 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
+import { Grid, Button, Typography } from '@material-ui/core';
+import { Add as AddIcon } from '@material-ui/icons';
 import TeamCard from './TeamCard'
 
+const divisions = ["SR5", "SR3", "INT5", "INT3", "JR", "Elem", "Classroom"]
 const teamData = [
-  {name: "Foo", division: "Junior"},
-  {name: "Bar", division: "Senior"},
-  {name: "Baz", division: "Intermediate"},
-  {name: "Qux", division: "Junior"},
+  {name: "Foo", division: divisions[Math.floor(Math.random() * Math.floor(divisions.length))]},
+  {name: "Bar", division: "Elem"},
+  {name: "Baz", division: "SR5"},
+  {name: "Qux", division: "JR"},
 ]
 const styles = theme => ({
   root: {
@@ -20,7 +18,7 @@ const styles = theme => ({
     padding: theme.spacing.unit * 2
   },
   fab: {
-    position: 'absolute',
+    position: 'fixed',
     bottom: theme.spacing.unit * 2,
     right: theme.spacing.unit * 2,
   },
@@ -36,17 +34,17 @@ function TeamList(props) {
   return (
     <div className={classes.root}>
       <Grid container spacing={24}>
-      <Grid item xs={12}>
-      <Typography variant="headline">Your Teams</Typography>
+        <Grid item xs={12}>
+          <Typography variant="headline">Your Teams</Typography>
+        </Grid>
+        {teamData.map(team => <Grid key={team.name} item sm={4} xs={6}>
+          <TeamCard team={team}/>
+        </Grid>)}
       </Grid>
-      {teamData.map(team => <Grid key={team.name} item sm={4} xs={6}>
-        <TeamCard team={team}/>
-      </Grid>)}
-      </Grid>
+
       <Button variant="fab" className={classes.fab} color="primary">
         <AddIcon />
       </Button>
-
     </div>
   );
 }
